@@ -6,12 +6,17 @@ import { arrayMove } from '@dnd-kit/sortable'
 import styles from './App.module.css'
 import CutUpLinesContainer from './components/CutUpLinesContainer.tsx'
 import { DragEndEvent } from '@dnd-kit/core/dist/types'
+import generateId from './utils/generateId.ts'
+
+export type Line = { id: number; text: string }
 
 function App() {
-  const [lines, setLines] = useLocalStorage<string[]>('lines', [])
+  const [lines, setLines] = useLocalStorage<Line[]>('lines', [])
 
   function handleOnChange(event: ChangeEvent<HTMLTextAreaElement>) {
-    const newLines = event.target.value.split('\n')
+    const textLines = event.target.value.split('\n')
+    // Ugly hack: keep generating IDs rather than reusing them, works for now
+    const newLines = textLines.map((text) => ({ id: generateId(), text }))
     setLines(newLines)
   }
 
@@ -19,11 +24,11 @@ function App() {
     const { active, over } = event
 
     if (active.id !== over?.id) {
-      setLines((items) => {
-        const oldIndex = items.indexOf(active.id)
-        const newIndex = items.indexOf(over.id)
+      setLines((lines) => {
+        const oldIndex = lines.findIndex(({ id }) => id === active.id)
+        const newIndex = lines.findIndex(({ id }) => id === over?.id)
 
-        return arrayMove(items, oldIndex, newIndex)
+        return arrayMove(lines, oldIndex, newIndex)
       })
     }
   }
@@ -35,7 +40,7 @@ function App() {
         cols={50}
         onChange={handleOnChange}
         placeholder="Enter some text to cut up"
-        value={lines.join('\n')}
+        value={lines.map(({ text }) => text).join('\n')}
       ></textarea>
       <CutUpLinesContainer lines={lines} onDragEnd={handleDragEnd} />
     </main>

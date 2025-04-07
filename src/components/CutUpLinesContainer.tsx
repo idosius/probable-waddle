@@ -16,9 +16,10 @@ import CutUpLine from './CutUpLine.tsx'
 
 import styles from './CutUpLinesContainer.module.css'
 import type { DragEndEvent } from '@dnd-kit/core/dist/types'
+import { Line } from '../App.tsx'
 
 type CutUpLinesContainerProps = {
-  lines: string[]
+  lines: Line[]
   onDragEnd: (event: DragEndEvent) => void
 }
 
@@ -41,8 +42,8 @@ export default function CutUpLinesContainer({
     >
       <SortableContext items={lines} strategy={verticalListSortingStrategy}>
         <div className={styles.container}>
-          {lines.map((line) => (
-            <CutUpLine key={line} id={line} text={line} />
+          {lines.map(({ id, text }) => (
+            <CutUpLine key={id} id={id} text={text} />
           ))}
         </div>
       </SortableContext>

@@ -4,7 +4,7 @@ import { CSS } from '@dnd-kit/utilities'
 import styles from './CutUpLine.module.css'
 
 type CutUpLineProps = {
-  id: string
+  id: number
   text: string
 }
 
