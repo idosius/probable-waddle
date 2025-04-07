@@ -6,6 +6,7 @@ import { arrayMove } from '@dnd-kit/sortable'
 import styles from './App.module.css'
 import CutUpLinesContainer from './components/CutUpLinesContainer.tsx'
 import { DragEndEvent } from '@dnd-kit/core/dist/types'
+import { shuffleArray } from './utils/shuffleArray.ts'
 
 export type Line = { id: number; text: string }
 
@@ -40,13 +41,22 @@ function App() {
     }
   }
 
+  function handleRandomizeClick() {
+    setLines(shuffleArray)
+  }
+
   return (
     <div className={styles.container}>
-      <header className={styles.header}>
-        <h1 className={styles.title}>Probable Waddle</h1>
-        <p>William S. Burroughs writing cut-up technique</p>
-      </header>
       <main className={styles.main}>
+        <header className={styles.header}>
+          <h1 className={styles.title}>Probable Waddle</h1>
+          <p className={styles.subtitle}>
+            William S. Burroughs writing cut-up technique
+          </p>
+        </header>
+        <button className={styles.randomize} onClick={handleRandomizeClick}>
+          Randomize Order
+        </button>
         <textarea
           rows={40}
           cols={50}
