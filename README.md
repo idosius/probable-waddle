@@ -7,6 +7,10 @@ Web app for using the William S. Burroughs cut-up technique to generate creative
 - The textbox gets updated automatically. Copy or edit it as you like.
 - Text gets automatically saved in your browser's local storage.
 
+## Demo
+
+https://probable-waddle-beryl.vercel.app/
+
 ## Development
 
 ```bash
