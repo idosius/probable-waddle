@@ -6,7 +6,6 @@ import { arrayMove } from '@dnd-kit/sortable'
 import styles from './App.module.css'
 import CutUpLinesContainer from './components/CutUpLinesContainer.tsx'
 import { DragEndEvent } from '@dnd-kit/core/dist/types'
-import generateId from './utils/generateId.ts'
 
 export type Line = { id: number; text: string }
 
@@ -15,9 +14,17 @@ function App() {
 
   function handleOnChange(event: ChangeEvent<HTMLTextAreaElement>) {
     const textLines = event.target.value.split('\n')
-    // Ugly hack: keep generating IDs rather than reusing them, works for now
-    const newLines = textLines.map((text) => ({ id: generateId(), text }))
-    setLines(newLines)
+
+    setLines((prevLines) => {
+      // Keep IDs if a line was edited
+      if (textLines.length === prevLines.length) {
+        return prevLines.map(({ id }, i) => ({ id, text: textLines[i] }))
+      }
+
+      // Re-map IDs if lines were added/removed
+      let id = 0
+      return textLines.map((text) => ({ id: ++id, text }))
+    })
   }
 
   function handleDragEnd(event: DragEndEvent) {
