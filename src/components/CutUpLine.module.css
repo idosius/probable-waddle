@@ -1,0 +1,12 @@
+.container {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.5rem;
+    line-height: 1;
+    margin: 1rem 0;
+    cursor: pointer;
+}
+
+.highlight {
+    background: white;
+    color: black;
+}
