@@ -41,16 +41,22 @@ function App() {
   }
 
   return (
-    <main className={styles.container}>
-      <textarea
-        rows={40}
-        cols={50}
-        onChange={handleOnChange}
-        placeholder="Enter some text to cut up"
-        value={lines.map(({ text }) => text).join('\n')}
-      ></textarea>
-      <CutUpLinesContainer lines={lines} onDragEnd={handleDragEnd} />
-    </main>
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <h1 className={styles.title}>Probable Waddle</h1>
+        <p>William S. Burroughs writing cut-up technique</p>
+      </header>
+      <main className={styles.main}>
+        <textarea
+          rows={40}
+          cols={50}
+          onChange={handleOnChange}
+          placeholder="Enter some text to cut up"
+          value={lines.map(({ text }) => text).join('\n')}
+        ></textarea>
+        <CutUpLinesContainer lines={lines} onDragEnd={handleDragEnd} />
+      </main>
+    </div>
   )
 }
 
