@@ -11,8 +11,7 @@ function App() {
   const [lines, setLines] = useLocalStorage<string[]>('lines', [])
 
   function handleOnChange(event: ChangeEvent<HTMLTextAreaElement>) {
-    const newLines = event.target.value.split(/\n+/)
-    console.log(event.target.value, newLines)
+    const newLines = event.target.value.split('\n')
     setLines(newLines)
   }
 
