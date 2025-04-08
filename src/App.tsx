@@ -61,7 +61,7 @@ function App() {
           rows={40}
           cols={50}
           onChange={handleOnChange}
-          placeholder="Enter some text to cut up"
+          placeholder="Enter some text to cut up, line by line"
           value={lines.map(({ text }) => text).join('\n')}
         ></textarea>
         <CutUpLinesContainer lines={lines} onDragEnd={handleDragEnd} />
