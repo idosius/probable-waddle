@@ -2,11 +2,12 @@ import { ChangeEvent } from 'react'
 
 import { useLocalStorage } from '@uidotdev/usehooks'
 import { arrayMove } from '@dnd-kit/sortable'
+import { DragEndEvent } from '@dnd-kit/core/dist/types'
+
+import CutUpLinesContainer from './components/CutUpLinesContainer.tsx'
+import { shuffleArray } from './utils/shuffleArray.ts'
 
 import styles from './App.module.css'
-import CutUpLinesContainer from './components/CutUpLinesContainer.tsx'
-import { DragEndEvent } from '@dnd-kit/core/dist/types'
-import { shuffleArray } from './utils/shuffleArray.ts'
 
 export type Line = { id: number; text: string }
 
@@ -59,7 +60,6 @@ function App() {
         </button>
         <textarea
           rows={40}
-          cols={50}
           onChange={handleOnChange}
           placeholder="Enter some text to cut up, line by line"
           value={lines.map(({ text }) => text).join('\n')}

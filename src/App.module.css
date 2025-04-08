@@ -6,10 +6,14 @@
 
 .main {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: min-content 1fr;
   gap: 2rem;
+}
 
+@media (min-width: 786px) {
+  .main {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: min-content 1fr;
+  }
 }
 
 .title {
